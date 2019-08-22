@@ -11,18 +11,24 @@ import {
   Param,
   Delete,
 } from '@nestjs/common';
+import { RabbitMQServer } from 'src/helper/rabbitMQServer';
 
 @Controller('amenity')
 export class AmenityController {
   constructor(private readonly amenityService: AmenityService) {}
 
-//   @Get()
-//    findAll(): string {
-//     return 'Hello Wolrd!';
-//   }
+  //   @Get()
+  //    findAll(): string {
+  //     return 'Hello Wolrd!';
+  //   }
 
   @Post()
   async create(@Body() createItemDto: AmenityType): Promise<Amenity> {
+    const conn = new RabbitMQServer('amqp://localhost', 'logs');
+    let test = {
+      hello: "Hello World"
+    }
+    await conn.publish(test);
     return this.amenityService.create(createItemDto);
   }
 
@@ -31,19 +37,19 @@ export class AmenityController {
     return this.amenityService.findAll();
   }
 
-//   @Get(':id')
-//   async findOne(@Param('id') id: string): Promise<Item> {
-//     return this.itemsService.findOne(id);
-//   }
+  //   @Get(':id')
+  //   async findOne(@Param('id') id: string): Promise<Item> {
+  //     return this.itemsService.findOne(id);
+  //   }
 
-//   @Put(':id')
-//   async update(@Param('id') id: string, @Body() updateCatDto: Item): Promise<Item> {
-//     return this.itemsService.update(id, updateCatDto);
-//   }
+  //   @Put(':id')
+  //   async update(@Param('id') id: string, @Body() updateCatDto: Item): Promise<Item> {
+  //     return this.itemsService.update(id, updateCatDto);
+  //   }
 
-//   @Delete(':id')
-//   async remove(@Param('id') id: string): Promise<Item> {
-//     console.log('delete controller');
-//     return this.itemsService.delete(id);
-//   }
+  //   @Delete(':id')
+  //   async remove(@Param('id') id: string): Promise<Item> {
+  //     console.log('delete controller');
+  //     return this.itemsService.delete(id);
+  //   }
 }

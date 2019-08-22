@@ -25,6 +25,7 @@
     "@nestjs/graphql": "^6.2.4",
     "@nestjs/mongoose": "^6.1.2",
     "@nestjs/platform-express": "^6.0.0",
+    "amqplib": "^0.5.5",
     "apollo-server-express": "^2.7.0-alpha.3",
     "class-transformer": "^0.2.3",
     "dotenv": "^8.0.0",
